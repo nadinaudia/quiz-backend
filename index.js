@@ -3,14 +3,19 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 5132;
+const port = process.env.PORT || 5132;  // Menggunakan PORT dari Heroku
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://quizapp-one-mu.vercel.app'
+  origin: 'https://quizapp-one-mu.vercel.app',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight CORS request
+app.options('*', cors());  // Menangani semua permintaan OPTIONS
 
 // Dummy user database
 const users = [
@@ -23,7 +28,6 @@ const users = [
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
 
-  // Check if user exists
   const user = users.find(u => u.username === username && u.password === password);
 
   if (user) {
