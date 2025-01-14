@@ -9,7 +9,7 @@ const port = 5132;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'https://quizapp-one-mu.vercel.app/'
+    origin: 'https://quizapp-one-mu.vercel.app'
 }));
 
 // Dummy user database
