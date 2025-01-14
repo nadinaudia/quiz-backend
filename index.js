@@ -30,7 +30,8 @@ app.post('/login', (req, res) => {
     res.status(200).json({ isCorrect: true, message: 'Login successful', user: { username: user.username } });
   } else {
     res.status(401).json({ isCorrect: false, message: 'Invalid username or password' });
-  }false});
+  }
+});
 
 // Default route
 app.get('/', (req, res) => {
